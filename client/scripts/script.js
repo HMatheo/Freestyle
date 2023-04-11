@@ -31,7 +31,7 @@ function sendMessage() {
 
 // add event listeners
 inputField.addEventListener('keydown', event => {
-    if (event.key == 'Enter') {
+    if (event.key === 'Enter') {
         event.preventDefault();
         sendMessage();
     }
