@@ -1,5 +1,5 @@
 import express from "express";
-import mikroOrmConf from "./config/mikro-orm.config";
+import mikroOrmConf from "@/config/mikro-orm.config";
 import {MikroORM} from "@mikro-orm/core";
 
 class App {
