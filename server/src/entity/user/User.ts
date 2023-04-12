@@ -1,16 +1,19 @@
 import {BaseEntity} from "@/entity/BaseEntity";
-import {Entity, Property} from "@mikro-orm/core";
+import {Entity, Property, Unique} from "@mikro-orm/core";
 
-@Entity()
+@Entity({tableName:"users"})
 export class User extends BaseEntity {
     @Property({columnType:"text"})
-    username: string;
+    @Unique()
+    username!: string;
+
 
     @Property({columnType:"text"})
-    email: string;
+    @Unique()
+    email!: string;
 
     @Property({columnType:"text"})
-    password: string;
+    password!: string;
 
     @Property({columnType:"date", nullable:true})
     lastLoginAt?: Date;
