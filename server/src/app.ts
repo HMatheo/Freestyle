@@ -1,11 +1,26 @@
+import 'reflect-metadata';
 import express from "express";
+import session from "express-session";
 import mikroOrmConf from "@/config/mikro-orm.config";
-import {MikroORM} from "@mikro-orm/core";
+import {EntityManager, EntityRepository, MikroORM, RequestContext} from "@mikro-orm/core";
+import {User} from "@/entity";
+import {COOKIE_SECRET} from "@/config";
+import {ApiRoutes} from "@/routes";
+
+declare module "express-session" {
+    interface SessionData {
+        userId: string;
+    }
+}
+export const DI = {} as {
+    orm: MikroORM,
+    em: EntityManager,
+    userRepository: EntityRepository<User>
+};
 
 class App {
     public app: express.Application;
     public port: string | number;
-    private orm: MikroORM;
 
     constructor() {
         this.app = express();
@@ -18,15 +33,30 @@ class App {
 
     private async connectToDatabase(): Promise<void> {
         try {
-            this.orm = await MikroORM.init(mikroOrmConf);
-            await this.orm.getSchemaGenerator().updateSchema();
+            DI.orm = await MikroORM.init(mikroOrmConf);
+            DI.em = DI.orm.em;
+            DI.userRepository = DI.orm.em.getRepository(User);
+            await DI.orm.getSchemaGenerator().updateSchema();
         } catch(e: any) {
             console.log(e.message);
         }
+        this.app.use((_1, _2, next) => RequestContext.create(DI.orm.em, next));
     }
 
     private initializeMiddlewares(): void {
         this.app.use(express.json());
+        this.app.use(express.urlencoded({extended: true}))
+        this.app.use(session({
+            name: 'q_user',
+            resave: false,
+            cookie: {
+                maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+                httpOnly: true,
+                sameSite: 'lax'
+            },
+            saveUninitialized: false,
+            secret: COOKIE_SECRET
+        }));
     }
 
     public listen(): void {
@@ -39,9 +69,7 @@ class App {
     }
 
     private initializeRoutes(): void {
-        this.app.use('/', (req: express.Request, res: express.Response) => {
-            return res.status(200).send("Hello world !");
-        });
+        this.app.use('/', new ApiRoutes().router);
     }
 }
 
