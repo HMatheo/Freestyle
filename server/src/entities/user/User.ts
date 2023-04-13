@@ -15,6 +15,6 @@ export class User extends BaseEntity {
     @Property({columnType:"varchar"})
     password!: string;
 
-    @Property({columnType:"date", nullable:true})
-    lastLoginAt?: Date;
+    @Property({columnType:"int", nullable:true})
+    lastLoginAt?: number;
 }
