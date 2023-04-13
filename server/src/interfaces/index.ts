@@ -5,3 +5,4 @@ export interface IDefaultResponse {
 
 export * from './auth.interface';
 export * from './routes.interface';
+export * from './user.interface';

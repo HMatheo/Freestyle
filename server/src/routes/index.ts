@@ -1,6 +1,7 @@
 import {IRoutes} from "@/interfaces";
 import {Router} from "express";
 import {AuthRoute} from "@/routes/auth.route";
+import {UserRoute} from "@/routes/user.route";
 
 export class ApiRoutes implements IRoutes {
     private path: string = "/api/v1/";
@@ -11,6 +12,7 @@ export class ApiRoutes implements IRoutes {
 
     private initializeRoutes(): void {
         this.router.use(`${this.path}auth`, (new AuthRoute()).router);
+        this.router.use(`${this.path}user`, (new UserRoute()).router);
     }
 }
 
