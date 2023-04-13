@@ -1,8 +1,8 @@
 import {IRoutes} from "@/interfaces";
 import {Router} from "express";
-import {UserController} from "@/controllers/user.controller";
+import {UserController} from "@/controllers";
 import {AuthMiddleware, ValidationMiddleware} from "@/middlewares";
-import {ChangePasswordDto, ChangeUsernameDto} from "@/dtos/user.dto";
+import {ChangePasswordDto, ChangeUsernameDto} from "@/dtos";
 
 export class UserRoute implements IRoutes {
     public path = "/";
