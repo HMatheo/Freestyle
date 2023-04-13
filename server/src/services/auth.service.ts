@@ -1,4 +1,4 @@
-import {User} from "@/entity";
+import {User} from "@/entities";
 import {IDataStoredInToken, ILoginInput, ILoginResponse, IRegisterInput} from "@/interfaces";
 import {sign} from "jsonwebtoken";
 import {JWT_SECRET} from "@/config";

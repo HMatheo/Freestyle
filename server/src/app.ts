@@ -3,7 +3,7 @@ import express from "express";
 import session from "express-session";
 import mikroOrmConf from "@/config/mikro-orm.config";
 import {EntityManager, EntityRepository, MikroORM, RequestContext} from "@mikro-orm/core";
-import {User} from "@/entity";
+import {User} from "@/entities";
 import {COOKIE_SECRET} from "@/config";
 import {ApiRoutes} from "@/routes";
 

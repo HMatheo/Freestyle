@@ -1,4 +1,4 @@
-import {BaseEntity} from "@/entity/BaseEntity";
+import {BaseEntity} from "@/entities/BaseEntity";
 import {Entity, Property, Unique} from "@mikro-orm/core";
 
 @Entity({tableName:"users"})

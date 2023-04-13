@@ -1,5 +1,5 @@
 import {IDefaultResponse} from "@/interfaces";
-import {User} from "@/entity";
+import {User} from "@/entities";
 
 export interface IDataStoredInToken {
     id: string;
