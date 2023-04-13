@@ -4,7 +4,7 @@ import express from "express";
 import session from "express-session";
 import mikroOrmConf from "@/config/mikro-orm.config";
 import {EntityManager, EntityRepository, MikroORM, RequestContext} from "@mikro-orm/core";
-import {User} from "@/entities";
+import {Message, User} from "@/entities";
 import {COOKIE_SECRET} from "@/config";
 import {ApiRoutes} from "@/routes";
 
@@ -16,7 +16,8 @@ declare module "express-session" {
 export const DI = {} as {
     orm: MikroORM,
     em: EntityManager,
-    userRepository: EntityRepository<User>
+    userRepository: EntityRepository<User>,
+    messageRepository: EntityRepository<Message>
 };
 
 class App {
@@ -37,6 +38,7 @@ class App {
             DI.orm = await MikroORM.init(mikroOrmConf);
             DI.em = DI.orm.em;
             DI.userRepository = DI.orm.em.getRepository(User);
+            DI.messageRepository = DI.orm.em.getRepository(Message);
             await DI.orm.getSchemaGenerator().updateSchema();
         } catch(e: any) {
             console.log(e.message);

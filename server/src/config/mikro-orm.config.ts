@@ -1,6 +1,6 @@
 import {defineConfig} from "@mikro-orm/postgresql";
 import {DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USERNAME} from "@/config";
-import {User} from "@/entities";
+import {Message, User} from "@/entities";
 export default defineConfig({
     clientUrl: `postgresql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
     type: "postgresql",
@@ -9,6 +9,7 @@ export default defineConfig({
     forceUtcTimezone: true,
     entities: [
         User,
+        Message
     ],
     allowGlobalContext: true
 });
