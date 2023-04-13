@@ -3,16 +3,16 @@ import {Entity, Property, Unique} from "@mikro-orm/core";
 
 @Entity({tableName:"users"})
 export class User extends BaseEntity {
-    @Property({columnType:"text"})
+    @Property({columnType:"varchar"})
     @Unique()
     username!: string;
 
 
-    @Property({columnType:"text"})
+    @Property({columnType:"varchar"})
     @Unique()
     email!: string;
 
-    @Property({columnType:"text"})
+    @Property({columnType:"varchar"})
     password!: string;
 
     @Property({columnType:"date", nullable:true})
