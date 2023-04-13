@@ -22,4 +22,19 @@ export class UserController {
             });
         }
     }
+
+    public changeUsername = async(req: AuthenticateRequest, res: Response) => {
+        try {
+            const user: User = req.user;
+            const changeUsernameInput = {...req.body, user};
+            const changeUsernameResponse: IDefaultResponse = await this.userService.changeUsername(changeUsernameInput);
+
+            res.status(changeUsernameResponse.success ? 201 : 400).json(changeUsernameResponse);
+        } catch(e: any) {
+            res.status(400).json({
+                success: false,
+                message: e.message
+            });
+        }
+    }
 }

@@ -5,11 +5,19 @@ export class ChangePasswordDto {
     @IsNotEmpty()
     @MinLength(6)
     @MaxLength(32)
-    oldPassword: string;
+    public oldPassword: string;
 
     @IsString()
     @IsNotEmpty()
     @MinLength(6)
     @MaxLength(32)
-    newPassword: string;
+    public newPassword: string;
+}
+
+export class ChangeUsernameDto {
+    @IsString()
+    @IsNotEmpty()
+    @MinLength(3)
+    @MaxLength(16)
+    public newUsername: string;
 }

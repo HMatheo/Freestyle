@@ -5,3 +5,8 @@ export interface IChangePasswordInput {
     oldPassword: string;
     newPassword: string;
 }
+
+export interface IChangeUsernameInput {
+    user: User;
+    newUsername: string;
+}
