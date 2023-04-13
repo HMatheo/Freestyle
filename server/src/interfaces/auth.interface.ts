@@ -1,5 +1,6 @@
 import {IDefaultResponse} from "@/interfaces";
 import {User} from "@/entities";
+import {Request} from "express";
 
 export interface IDataStoredInToken {
     id: string;
@@ -20,4 +21,8 @@ export interface IRegisterInput {
 export interface ILoginResponse extends IDefaultResponse {
     token?: string;
     user?: User;
+}
+
+export interface AuthenticateRequest extends Request {
+    user: User;
 }

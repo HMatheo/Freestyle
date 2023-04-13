@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import cookieParser from "cookie-parser";
 import express from "express";
 import session from "express-session";
 import mikroOrmConf from "@/config/mikro-orm.config";
@@ -44,6 +45,7 @@ class App {
     }
 
     private initializeMiddlewares(): void {
+        this.app.use(cookieParser());
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: true}))
         this.app.use(session({
