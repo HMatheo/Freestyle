@@ -26,7 +26,7 @@ export class AuthService {
         } as ILoginResponse;
 
         if (input.password == findUser.password) {
-            findUser.lastLoginAt = new Date();
+            findUser.lastLoginAt = Date.now();
             await DI.userRepository.persistAndFlush(findUser);
             return {
                 success: true,

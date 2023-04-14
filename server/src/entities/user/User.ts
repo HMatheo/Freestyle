@@ -1,5 +1,5 @@
 import {BaseEntity} from "@/entities/BaseEntity";
-import {Entity, Property, Unique} from "@mikro-orm/core";
+import {BigIntType, Entity, Property, Unique} from "@mikro-orm/core";
 
 @Entity({tableName:"users"})
 export class User extends BaseEntity {
@@ -15,6 +15,6 @@ export class User extends BaseEntity {
     @Property({columnType:"varchar"})
     password!: string;
 
-    @Property({columnType:"int", nullable:true})
+    @Property({type:BigIntType, nullable:true})
     lastLoginAt?: number;
 }
