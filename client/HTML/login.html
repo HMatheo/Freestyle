@@ -10,24 +10,43 @@
         <div class="container">
             <div class="login-box">
             <h2>Connexion</h2>
-                <form>
+<!--                <form>-->
                     <div class="form-group">
-                        <label for="username">Nom d'utilisateur</label>
-                        <input type="text" id="username" placeholder="Entrez votre nom d'utilisateur">
+                        <label for="email">Adresse mail</label>
+                        <input type="text" id="email" placeholder="Entrez votre adresse mail">
                     </div>
                     <div class="form-group">
                         <label for="password">Mot de passe</label>
                         <input type="password" id="password" placeholder="Entrez votre mot de passe">
                     </div>
                     <div class="button-container">
-                        <button type="submit">S'inscrire</button>
+                        <button id="submit">Se connecter</button>
                     </div>
-                </form>
+<!--                </form>-->
                 <div class="signup-link">
                     Vous n'avez pas de compte ? <a href="../HTML/signUp.html">Inscrivez-vous</a>
                 </div>
             </div>
         </div>
     </body>
+    <script>
+        const loginButton = document.getElementById("submit");
+
+        loginButton.onclick = async function() {
+            fetch('http://localhost:8080/api/v1/auth/login', {
+                method: "POST", // or 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    "email": document.getElementById("email").value,
+                    "password": document.getElementById("password").value
+                })
+            }).then(response => response.json()).then((data) => {
+                console.log(data);
+            })
+        }
+    </script>
 </html>
 

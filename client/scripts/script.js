@@ -42,7 +42,8 @@ sendButton.addEventListener('click', event => {
     event.preventDefault();
     sendMessage();
 });
-document.getElementById("send").addEventListener('click', () => {
+
+/*document.getElementById("send").addEventListener('click', () => {
     const input = document.getElementById("input_text").value; // on récupère la valeure de l'input
     document.getElementById("input_text").value = ""; // on réinitialise l'input
     var li = document.createElement("li");
@@ -52,4 +53,4 @@ document.getElementById("send").addEventListener('click', () => {
     span.textContent = input;
     document.getElementById("message-list").appendChild(li);
     li.appendChild(span);
-});
+});*/
