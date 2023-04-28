@@ -11,6 +11,7 @@ import {createServer, IncomingMessage, Server} from "http";
 import { WebSocketServer } from 'ws';
 import * as console from "console";
 import * as stream from "stream";
+import cors from "cors";
 
 declare module "express-session" {
     interface SessionData {
@@ -41,7 +42,7 @@ class App {
     public app: express.Application;
     public port: string | number;
     public server: Server;
-    public wsServer: ws;
+    public wsServer: WebSocketServer;
     public wsConnections = new Map();
 
     constructor() {
@@ -69,6 +70,7 @@ class App {
     }
 
     private initializeMiddlewares(): void {
+        this.app.use(cors());
         this.app.use(cookieParser());
         this.app.use(express.json());
         this.app.use(express.urlencoded({extended: true}))
